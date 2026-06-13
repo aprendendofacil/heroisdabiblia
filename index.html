@@ -106,20 +106,13 @@
     z-index: 1;
   }
 
-  .hero-mockup-placeholder {
-    background: rgba(255,255,255,0.07);
-    border: 2px dashed rgba(245,158,11,0.4);
-    border-radius: 20px;
+  .hero-mockup {
     max-width: 480px;
     width: 100%;
     margin: 0 auto 40px;
-    height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255,255,255,0.35);
-    font-size: 0.85rem;
-    font-weight: 700;
+    display: block;
+    border-radius: 20px;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
     position: relative;
     z-index: 1;
   }
@@ -752,9 +745,11 @@
   <h1>Seus filhos vão <span>colecionar</span> os<br>Heróis da Bíblia!</h1>
   <p class="hero-sub">O álbum de figurinhas que transforma os personagens bíblicos em heróis que as crianças vão querer conhecer, colecionar e nunca esquecer.</p>
 
-  <div class="hero-mockup-placeholder">
-    📸 Insira aqui o mockup do produto
-  </div>
+  <img
+    src="https://aprendendofacil.github.io/heroisdabiblia/11.png"
+    alt="Mockup Heróis da Bíblia"
+    class="hero-mockup"
+  />
 
   <div class="hero-stats">
     <div class="stat">
