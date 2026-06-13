@@ -107,9 +107,9 @@
   }
 
   .hero-mockup {
-    max-width: 360px;
-    width: 75%;
-    margin: 0 auto 40px;
+    max-width: 420px;
+    width: 85%;
+    margin: 32px auto;
     display: block;
     filter: drop-shadow(0 16px 32px rgba(0,0,0,0.35));
     position: relative;
@@ -118,8 +118,9 @@
 
   @media (max-width: 480px) {
     .hero-mockup {
-      width: 68%;
-      max-width: 260px;
+      width: 82%;
+      max-width: 320px;
+      margin: 24px auto;
     }
   }
 
@@ -1043,7 +1044,7 @@
     background: var(--white);
     border-left: 4px solid var(--emerald);
     border-radius: 10px;
-    padding: 10px 14px;
+    padding: 10px 16px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     display: flex;
     align-items: center;
@@ -1117,26 +1118,18 @@
     { nome: "Adriana Z.", cidade: "João Pessoa/PB" },
   ];
 
-  const tempos = [
-    "agora mesmo", "há 2 minutos", "há 5 minutos",
-    "há 8 minutos", "há 12 minutos", "há 18 minutos"
-  ];
-
   let idx = Math.floor(Math.random() * compradores.length);
   const container = document.getElementById('socialProof');
 
   function showToast() {
     const pessoa = compradores[idx % compradores.length];
-    const tempo = tempos[Math.floor(Math.random() * tempos.length)];
     idx++;
 
     const toast = document.createElement('div');
     toast.className = 'sp-toast';
     toast.innerHTML = `
-      <div class="sp-icon">🎴</div>
       <div class="sp-text">
         <span>${pessoa.nome}</span> de ${pessoa.cidade} acabou de comprar!
-        <div class="sp-time">${tempo}</div>
       </div>
     `;
 
@@ -1148,10 +1141,10 @@
     }, 4000);
   }
 
-  // Começa após 3 segundos, depois aparece a cada 6 segundos
+  // Começa após 3 segundos, depois aparece a cada 15 segundos
   setTimeout(() => {
     showToast();
-    setInterval(showToast, 6000);
+    setInterval(showToast, 15000);
   }, 3000);
 </script>
 
