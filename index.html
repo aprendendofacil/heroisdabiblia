@@ -107,14 +107,20 @@
   }
 
   .hero-mockup {
-    max-width: 480px;
-    width: 100%;
+    max-width: 360px;
+    width: 75%;
     margin: 0 auto 40px;
     display: block;
-    border-radius: 20px;
-    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+    filter: drop-shadow(0 16px 32px rgba(0,0,0,0.35));
     position: relative;
     z-index: 1;
+  }
+
+  @media (max-width: 480px) {
+    .hero-mockup {
+      width: 68%;
+      max-width: 260px;
+    }
   }
 
   .hero-stats {
@@ -1021,11 +1027,132 @@
   Produto digital   Acesso imediato   Garantia de 7 dias</p>
 </footer>
 
+<style>
+  .social-proof {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+  }
+
+  .sp-toast {
+    background: var(--white);
+    border-left: 4px solid var(--emerald);
+    border-radius: 10px;
+    padding: 10px 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    max-width: 260px;
+    animation: slideIn 0.4s ease forwards;
+    opacity: 0;
+  }
+
+  .sp-toast.hiding {
+    animation: slideOut 0.4s ease forwards;
+  }
+
+  .sp-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .sp-text { line-height: 1.4; }
+  .sp-text span { color: var(--emerald-dark); }
+  .sp-time { font-size: 0.72rem; color: var(--gray); font-weight: 600; margin-top: 2px; }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-30px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes slideOut {
+    from { opacity: 1; transform: translateX(0); }
+    to   { opacity: 0; transform: translateX(-30px); }
+  }
+
+  @media (max-width: 480px) {
+    .social-proof { bottom: 12px; left: 10px; }
+    .sp-toast { max-width: 220px; font-size: 0.78rem; }
+  }
+</style>
+
+<div class="social-proof" id="socialProof"></div>
+
 <script>
   function toggleFaq(btn) {
     const item = btn.parentElement;
     item.classList.toggle('open');
   }
+
+  const compradores = [
+    { nome: "Ana Paula S.", cidade: "São Paulo/SP" },
+    { nome: "Juliana M.", cidade: "Belo Horizonte/MG" },
+    { nome: "Fernanda R.", cidade: "Curitiba/PR" },
+    { nome: "Camila O.", cidade: "Rio de Janeiro/RJ" },
+    { nome: "Patrícia L.", cidade: "Fortaleza/CE" },
+    { nome: "Mariana T.", cidade: "Brasília/DF" },
+    { nome: "Larissa C.", cidade: "Salvador/BA" },
+    { nome: "Renata F.", cidade: "Porto Alegre/RS" },
+    { nome: "Débora N.", cidade: "Manaus/AM" },
+    { nome: "Priscila A.", cidade: "Recife/PE" },
+    { nome: "Cristiane V.", cidade: "Goiânia/GO" },
+    { nome: "Simone B.", cidade: "Natal/RN" },
+    { nome: "Vanessa H.", cidade: "Campinas/SP" },
+    { nome: "Aline K.", cidade: "Florianópolis/SC" },
+    { nome: "Luciana P.", cidade: "Belém/PA" },
+    { nome: "Tatiane W.", cidade: "São Luís/MA" },
+    { nome: "Gabriela E.", cidade: "Vitória/ES" },
+    { nome: "Rosana D.", cidade: "Campo Grande/MS" },
+    { nome: "Elaine Q.", cidade: "Maceió/AL" },
+    { nome: "Adriana Z.", cidade: "João Pessoa/PB" },
+  ];
+
+  const tempos = [
+    "agora mesmo", "há 2 minutos", "há 5 minutos",
+    "há 8 minutos", "há 12 minutos", "há 18 minutos"
+  ];
+
+  let idx = Math.floor(Math.random() * compradores.length);
+  const container = document.getElementById('socialProof');
+
+  function showToast() {
+    const pessoa = compradores[idx % compradores.length];
+    const tempo = tempos[Math.floor(Math.random() * tempos.length)];
+    idx++;
+
+    const toast = document.createElement('div');
+    toast.className = 'sp-toast';
+    toast.innerHTML = `
+      <div class="sp-icon">🎴</div>
+      <div class="sp-text">
+        <span>${pessoa.nome}</span> de ${pessoa.cidade} acabou de comprar!
+        <div class="sp-time">${tempo}</div>
+      </div>
+    `;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add('hiding');
+      setTimeout(() => toast.remove(), 400);
+    }, 4000);
+  }
+
+  // Começa após 3 segundos, depois aparece a cada 6 segundos
+  setTimeout(() => {
+    showToast();
+    setInterval(showToast, 6000);
+  }, 3000);
 </script>
 
 </body>
